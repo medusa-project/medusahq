@@ -1,4 +1,5 @@
 development: &development
+  :dls_url:       https://digital.library.illinois.edu
   :medusa_url:    https://medusa.library.illinois.edu
   :medusa_user:
   :medusa_secret:

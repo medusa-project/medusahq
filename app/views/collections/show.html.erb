@@ -1,1 +1,54 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <%= link_to 'Home', root_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to 'Collections', collections_path %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      <%= truncate(@collection.title, length: 80) %>
+    </li>
+  </ol>
+</nav>
+
 <h1><%= @collection.title %></h1>
+
+<section>
+  <h2>Descriptive Metadata</h2>
+
+  <p>Metadata below will be made public in the
+    <%= link_to 'digital library\'s list of collections',
+                Configuration.instance.dls_url + '/collections', target: '_blank' %>
+    if set to "open."</p>
+
+  <dl>
+    <dt>Description</dt>
+    <dd><%=raw @collection.description.html_safe.gsub("\n", '<br>') %></dd>
+    <dt>Access Link (to digital content in another system)</dt>
+    <dd><%= @collection.access_url ?
+                link_to(@collection.access_url, target: '_blank') : nil %></dd>
+    <dt>Physical Collection Link (finding aid or catalog record)</dt>
+    <dd><%= @collection.physical_collection_url ?
+                link_to(@collection.physical_collection_url, target: '_blank') : nil %></dd>
+    <dt>External ID</dt>
+    <dd><%= @collection.external_id %></dd>
+    <dt>Representative Image</dt>
+    <dd><%= @collection.representative_image_id %></dd>
+    <dt>Representative Item</dt>
+    <dd><%= @collection.representative_item_id %></dd>
+  </dl>
+</section>
+
+<section>
+  <h2>Administrative Metadata</h2>
+
+  <dl>
+    <dt>UUID</dt>
+    <dd><%= @collection.repository_id %></dd>
+    <dt>Internal Collection Description (suppressed from public view)</dt>
+    <dd><%= @collection.private_description %></dd>
+    <dt>Notes</dt>
+    <dd><%= @collection.notes %></dd>
+  </dl>
+</section>
