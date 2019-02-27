@@ -41,8 +41,11 @@ Rails.application.configure do
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
+  # Disable ActiveRecord logging.
+  config.active_record.logger = nil
+
   # Highlight code that triggered database queries in logs.
-  config.active_record.verbose_query_logs = true
+  config.active_record.verbose_query_logs = false
 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
