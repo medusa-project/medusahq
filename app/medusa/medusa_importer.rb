@@ -18,6 +18,7 @@ class MedusaImporter
       c.title                   = show_struct['title']
       c.description             = show_struct['description']
       c.description_html        = show_struct['description_html']
+      c.private_description     = show_struct['private_description'] # TODO: this doesn't exist
       c.access_url              = show_struct['access_url']
       c.external_id             = show_struct['external_id']
       c.published               = show_struct['publish']

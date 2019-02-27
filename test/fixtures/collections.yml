@@ -5,6 +5,7 @@ one:
   title: 'Collection One'
   description:
   description_html:
+  private_description:
   access_url:
   notes:
   external_id:
@@ -20,6 +21,7 @@ two:
   title: 'Collection Two'
   description:
   description_html:
+  private_description:
   access_url:
   notes:
   external_id:
