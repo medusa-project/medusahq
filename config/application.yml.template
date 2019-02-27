@@ -1,0 +1,10 @@
+development: &development
+  :medusa_url:    https://medusa.library.illinois.edu
+  :medusa_user:
+  :medusa_secret:
+
+test:
+  <<: *development
+
+production:
+  <<: *development
