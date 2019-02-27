@@ -6,9 +6,9 @@ ruby '2.6.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
 gem 'jbuilder', '~> 2.5'
+gem 'pg'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
-gem 'sqlite3'
 gem 'uglifier', '>= 1.3.0'
 
 # Reduces boot times through caching; required in config/boot.rb
