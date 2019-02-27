@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_143759) do
+ActiveRecord::Schema.define(version: 2019_02_27_172605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2019_02_27_143759) do
     t.index ["ongoing"], name: "index_collections_on_ongoing"
     t.index ["published"], name: "index_collections_on_published"
     t.index ["repository_id"], name: "index_collections_on_repository_id", unique: true
-    t.index ["title"], name: "index_collections_on_title", unique: true
+    t.index ["title"], name: "index_collections_on_title"
   end
 
 end
