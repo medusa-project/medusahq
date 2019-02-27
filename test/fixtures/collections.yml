@@ -7,6 +7,7 @@ one:
   description_html:
   private_description:
   access_url:
+  physical_collection_url:
   notes:
   external_id:
   published: false
@@ -23,6 +24,7 @@ two:
   description_html:
   private_description:
   access_url:
+  physical_collection_url:
   notes:
   external_id:
   published: false
