@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  repository_id: 179dd444-56ab-45d6-8705-555cd6d2f69f
+  title: 'Collection One'
+  description:
+  description_html:
+  access_url:
+  notes:
+  external_id:
+  published: false
+  ongoing: false
+  representative_image_id:
+  representative_item_id:
+  harvestable: false
+  contentdm_alias: one
+
+two:
+  repository_id: 06d2e39c-6485-4855-ab5a-1d95d02a2a7d
+  title: 'Collection Two'
+  description:
+  description_html:
+  access_url:
+  notes:
+  external_id:
+  published: false
+  ongoing: false
+  representative_image_id:
+  representative_item_id:
+  harvestable: false
+  contentdm_alias: two
