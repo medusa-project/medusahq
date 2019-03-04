@@ -1,24 +1,33 @@
-# README
+# Medusa Collection Manager
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Development Setup
 
-Things you may want to cover:
+```
+# Install RVM
+$ \curl -sSL https://get.rvm.io | bash -s stable
+$ source ~/.bash_profile
 
-* Ruby version
+# Clone the repository
+$ git clone https://github.com/medusa-project/collection-manager.git
+$ cd collection-manager
 
-* System dependencies
+# Install Ruby
+$ rvm install "$(< .ruby-version)" --autolibs=0
 
-* Configuration
+# Install Bundler
+$ gem install bundler
 
-* Database creation
+# Install gems
+$ bundle install
 
-* Database initialization
+# Configure the application
+$ cp config/application.yml.template config/application.yml
+# (Edit application.yml as necessary)
 
-* How to run the test suite
+# Create and seed the database
+$ bin/rails db:create
+$ bin/rails db:seed
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Import collections from Medusa
+$ bin/rails medusa:import
+```
