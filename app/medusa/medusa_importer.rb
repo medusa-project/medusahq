@@ -13,8 +13,8 @@ class MedusaImporter
       show_path     = mc['path']
       show_response = client.get(show_path + '.json')
       show_struct   = JSON.parse(show_response.body)
-      c = Collection.find_by_repository_id(show_struct['uuid']) || Collection.new
-      c.repository_id           = show_struct['uuid']
+      c = Collection.find_by(uuid: show_struct['uuid']) || Collection.new
+      c.uuid                    = show_struct['uuid']
       c.title                   = show_struct['title']
       c.description             = show_struct['description']
       c.description_html        = show_struct['description_html']

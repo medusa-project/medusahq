@@ -17,10 +17,10 @@ class CollectionsController < ApplicationController
   end
 
   ##
-  # Responds to GET /collections/:repository_id
+  # Responds to GET /collections/:uuid
   #
   def show
-    @collection = Collection.find_by_repository_id(params[:repository_id])
+    @collection = Collection.find_by_repository_id(params[:uuid])
   end
 
 end

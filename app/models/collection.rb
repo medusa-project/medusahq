@@ -1,24 +1,24 @@
 class Collection < ApplicationRecord
 
-  before_validation :assign_repository_id, on: :create
+  before_validation :assign_uuid, on: :create
 
-  validates_format_of :repository_id,
+  validates_format_of :uuid,
                       with: StringUtils::UUID_REGEX,
                       message: 'UUID is invalid'
   validates_presence_of :title
 
   def to_param
-    self.repository_id
+    self.uuid
   end
 
   def to_s
-    self.repository_id
+    self.uuid
   end
 
   private
 
-  def assign_repository_id
-    self.repository_id ||= SecureRandom.uuid
+  def assign_uuid
+    self.uuid ||= SecureRandom.uuid
   end
 
 end

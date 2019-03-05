@@ -5,13 +5,13 @@ class CollectionTest < ActiveSupport::TestCase
   test 'new collections have an auto-generated repository ID' do
     c = Collection.new(title: 'cats')
     c.save!
-    assert_not_empty c.repository_id
+    assert_not_empty c.uuid
   end
 
   test 'collections must have a UUID-format repository ID' do
     c = Collection.create!(title: 'cats')
     assert_raises ActiveRecord::RecordInvalid do
-      c.update!(repository_id: 'dogs')
+      c.update!(uuid: 'dogs')
     end
   end
 

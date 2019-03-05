@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_183555) do
+ActiveRecord::Schema.define(version: 2019_03_05_230434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "collections", force: :cascade do |t|
-    t.string "repository_id", null: false
+    t.string "uuid", null: false
     t.string "title", null: false
     t.text "description"
     t.text "description_html"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 2019_02_27_183555) do
     t.index ["harvestable"], name: "index_collections_on_harvestable"
     t.index ["ongoing"], name: "index_collections_on_ongoing"
     t.index ["published"], name: "index_collections_on_published"
-    t.index ["repository_id"], name: "index_collections_on_repository_id", unique: true
     t.index ["title"], name: "index_collections_on_title"
+    t.index ["uuid"], name: "index_collections_on_uuid", unique: true
   end
 
 end
