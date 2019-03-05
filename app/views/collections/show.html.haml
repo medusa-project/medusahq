@@ -18,9 +18,9 @@
     %dt Description
     %dd= raw(@collection.description.html_safe.gsub("\n", '<br>'))
     %dt Access Link (to digital content in another system)
-    %dd= @collection.access_url ? link_to(@collection.access_url, target: '_blank') : nil
+    %dd= @collection.access_url ? link_to(@collection.access_url, @collection.access_url, target: '_blank') : nil
     %dt Physical Collection Link (finding aid or catalog record)
-    %dd= @collection.physical_collection_url ? link_to(@collection.physical_collection_url, target: '_blank') : nil
+    %dd= @collection.physical_collection_url ? link_to(@collection.physical_collection_url, @collection.physical_collection_url, target: '_blank') : nil
     %dt External ID
     %dd= @collection.external_id
     %dt Representative Image
