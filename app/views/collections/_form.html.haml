@@ -2,7 +2,15 @@
   %fieldset
     %legend Descriptive Metadata
     = f.input :title
+    = f.input :description
+    = f.input :access_url, label: 'Access Link'
+    = f.input :physical_collection_url, label: 'Physical Collection Link'
+    = f.input :external_id, label: 'External Id'
+    = f.input :representative_image_id, label: 'Representative Image Id'
+    = f.input :representative_item_id, label: 'Representative Item Id'
   %fieldset
     %legend Administrative Metadata
+    = f.input :uuid, disabled: true
+    = f.input :private_description, label: 'Internal Collection Description'
     = f.input :notes
   = f.submit
