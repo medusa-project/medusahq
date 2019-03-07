@@ -1,5 +1,7 @@
 class CollectionsController < ApplicationController
 
+  before_action :get_collection, only: %i(show edit update)
+
   DEFAULT_WINDOW_SIZE = 100
 
   ##
@@ -20,7 +22,21 @@ class CollectionsController < ApplicationController
   # Responds to GET /collections/:uuid
   #
   def show
-    @collection = Collection.find_by_repository_id(params[:uuid])
+
+  end
+
+  def edit
+
+  end
+
+  def update
+
+  end
+
+  private
+
+  def get_collection
+    @collection = Collection.find_by(uuid: params[:uuid])
   end
 
 end

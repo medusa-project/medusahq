@@ -1,0 +1,8 @@
+= simple_form_for @collection, html: {class: 'form-horizontal'}, wrapper: :horizontal_form do |f|
+  %fieldset
+    %legend Descriptive Metadata
+    = f.input :title
+  %fieldset
+    %legend Administrative Metadata
+    = f.input :notes
+  = f.submit

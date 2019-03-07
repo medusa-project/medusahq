@@ -7,8 +7,11 @@
   %thead
     %th External ID
     %th Title
+    %th
   %tbody
     - @collections.each do |collection|
       %tr
         %td= collection.external_id
         %td= link_to(collection.title, collection)
+        %td
+          = link_to('Edit', edit_collection_path(collection))
