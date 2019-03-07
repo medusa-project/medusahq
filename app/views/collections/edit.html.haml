@@ -1,2 +1,4 @@
 = render 'single_layout' do
+  = link_to 'Delete Collection', collection_path(@collection), method: :delete, 'data-confirm': 'Are you sure? This cannot be undone.', class: 'btn btn-danger float-right', 'aria-role': :button
+  %br
   = render 'form'

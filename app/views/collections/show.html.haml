@@ -2,6 +2,8 @@
 
   %h1 #{@collection.title}
 
+  = link_to 'Edit Collection', edit_collection_path(@collection), class: 'btn btn-primary', 'aria-role': :button
+
   %section
     %h2 Descriptive Metadata
     %p

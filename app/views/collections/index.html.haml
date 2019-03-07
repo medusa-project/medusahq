@@ -1,17 +1,18 @@
-%nav{ 'aria-label': :breadcrumb}
-  %ol.breadcrumb
-    %li.breadcrumb-item= link_to('Home', root_path)
-    %li.breadcrumb-item.active Collections
+= render 'index_layout' do
 
-%table.table
-  %thead
-    %th External ID
-    %th Title
-    %th
-  %tbody
-    - @collections.each do |collection|
-      %tr
-        %td= collection.external_id
-        %td= link_to(collection.title, collection)
-        %td
-          = link_to('Edit', edit_collection_path(collection))
+  .row.mb-3
+    .col
+      = link_to 'New Collection', new_collection_path, class: 'btn btn-primary float-right', 'aria-role': :button
+
+  %table.table
+    %thead
+      %th External ID
+      %th Title
+      %th
+    %tbody
+      - @collections.each do |collection|
+        %tr
+          %td= collection.external_id
+          %td= link_to(collection.title, collection)
+          %td
+            = link_to('Edit', edit_collection_path(collection))

@@ -1,6 +1,6 @@
 class CollectionsController < ApplicationController
 
-  before_action :get_collection, only: %i(show edit update)
+  before_action :get_collection, only: %i(show edit update destroy)
 
   DEFAULT_WINDOW_SIZE = 100
 
@@ -34,6 +34,27 @@ class CollectionsController < ApplicationController
       redirect_to @collection
     else
       render 'edit'
+    end
+  end
+
+  def new
+    @collection = Collection.new
+  end
+
+  def create
+    @collection = Collection.new(allowed_params)
+    if @collection.save
+      redirect_to @collection
+    else
+      render 'new'
+    end
+  end
+
+  def destroy
+    if @collection.destroy
+      redirect_to collections_path
+    else
+      redirect_back alert: 'Unknown error deleting collection.', fallback_location: collections_path
     end
   end
 
