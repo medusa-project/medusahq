@@ -1,16 +1,16 @@
 = simple_form_for @collection, html: {class: 'form-horizontal'}, wrapper: :horizontal_form do |f|
   %fieldset
     %legend Descriptive Metadata
-    = f.input :title
-    = f.input :description
-    = f.input :access_url, label: 'Access Link'
-    = f.input :physical_collection_url, label: 'Physical Collection Link'
-    = f.input :external_id, label: 'External Id'
-    = f.input :representative_image_id, label: 'Representative Image Id'
-    = f.input :representative_item_id, label: 'Representative Item Id'
+    = f.input :title, label: t('title_label')
+    = f.input :description, label: t('description_label')
+    = f.input :access_url, label: t('access_url_label')
+    = f.input :physical_collection_url, label: t('physical_collection_url_label')
+    = f.input :external_id, label: t('external_id_label')
+    = f.input :representative_image_id, label: t('representative_image_id_label')
+    = f.input :representative_item_id, label: t('representative_item_id_label')
   %fieldset
     %legend Administrative Metadata
-    = f.input :uuid, disabled: true
-    = f.input :private_description, label: 'Internal Collection Description'
-    = f.input :notes
+    = f.input :uuid, disabled: true, label: t('uuid_label')
+    = f.input :private_description, label: t('private_description_label')
+    = f.input :notes, label: t('notes_label')
   = f.submit

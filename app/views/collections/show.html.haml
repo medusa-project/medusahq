@@ -10,26 +10,26 @@
       if set to "open."
 
     %dl
-      %dt Description
+      %dt= t 'description_label'
       %dd= raw(@collection.description.html_safe.gsub("\n", '<br>'))
-      %dt Access Link (to digital content in another system)
+      %dt= t('access_url_label')
       %dd= @collection.access_url ? link_to(@collection.access_url, @collection.access_url, target: '_blank') : nil
-      %dt Physical Collection Link (finding aid or catalog record)
+      %dt= t('physical_collection_url_label')
       %dd= @collection.physical_collection_url ? link_to(@collection.physical_collection_url, @collection.physical_collection_url, target: '_blank') : nil
-      %dt External ID
+      %dt= t('external_id_label')
       %dd= @collection.external_id
-      %dt Representative Image
+      %dt= t('representative_image_id_label')
       %dd= @collection.representative_image_id
-      %dt Representative Item
+      %dt= t('representative_item_id_label')
       %dd= @collection.representative_item_id
 
   %section
     %h2 Administrative Metadata
 
     %dl
-      %dt UUID
+      %dt= t('uuid_label')
       %dd= @collection.uuid
-      %dt Internal Collection Description (suppressed from public view)
+      %dt= t('private_description_label')
       %dd= @collection.private_description
-      %dt Notes
+      %dt= t('notes_label')
       %dd= @collection.notes

@@ -30,4 +30,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  access_url_label: Access Link (to digital content in another system)
+  description_label: Description
+  external_id_label: "External ID"
+  notes_label: "Notes"
+  physical_collection_url_label: "Physical Collection Link (finding aid or catalog record)"
+  private_description_label: "Internal Collection Description (suppressed from public view)"
+  representative_image_id_label: "Representative Image"
+  representative_item_id_label: "Representative Item"
+  title_label: Title
+  uuid_label: "UUID"
