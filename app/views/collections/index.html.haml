@@ -4,6 +4,7 @@
     .col
       = link_to 'New Collection', new_collection_path, class: 'btn btn-primary float-right', 'aria-role': :button
 
+  = will_paginate @collections, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
   %table.table
     %thead
       %th External ID
@@ -16,3 +17,4 @@
           %td= link_to(collection.title, collection)
           %td
             = link_to('Edit', edit_collection_path(collection))
+  = will_paginate @collections, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
