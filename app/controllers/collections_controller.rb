@@ -8,14 +8,12 @@ class CollectionsController < ApplicationController
   # Responds to GET /collections
   #
   def index
-    @start = params[:start]&.to_i || 0
-    @limit = params[:limit]&.to_i || DEFAULT_WINDOW_SIZE
+    @per_page = params[:per_page]&.to_i || DEFAULT_WINDOW_SIZE
+    @page = params[:page]&.to_i || 1
+    @start = (@page - 1) * @per_page
 
-    @collections = Collection.order(:title)
-    @count = @collections.count
-    @collections = @collections.
-        offset(@start).
-        limit(@limit)
+    @count = Collection.count
+    @collections = Collection.order(:title).paginate(per_page: @per_page, page: @page)
   end
 
   ##

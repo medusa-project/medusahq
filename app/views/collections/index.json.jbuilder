@@ -1,5 +1,6 @@
 json.start @start
-json.limit @limit
+json.page @page
+json.limit @per_page
 json.numResults @count
 json.results @collections do |col|
   json.title col.title
