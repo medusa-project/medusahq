@@ -3,4 +3,7 @@
   %div.navbar-nav
     = link_to('Home', root_path, class: 'nav-link nav-item')
     = link_to('Collections', collections_path, class: 'nav-link nav-item')
-    = link_to('Login', login_path, class: 'nav-link nav-item')
+    - if current_user
+      = link_to("Logout (#{current_user.uid})", logout_path, class: 'nav-link nav-item')
+    - else
+      = link_to('Login', login_path, class: 'nav-link nav-item')
