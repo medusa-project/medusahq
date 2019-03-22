@@ -4,7 +4,7 @@ class MedusaClient
 
   def get(path, *args)
     args = merge_args(args)
-    url = Configuration.instance.medusa_url.chomp('/')
+    url = Settings.medusa_url.chomp('/')
     http_client.get(url + path, args)
   end
 
@@ -14,7 +14,7 @@ class MedusaClient
 
   def head(path, *args)
     args = merge_args(args)
-    url = Configuration.instance.medusa_url.chomp('/')
+    url = Settings.medusa_url.chomp('/')
     http_client.head(url + path, args)
   end
 
@@ -35,7 +35,7 @@ class MedusaClient
   # @return [String, nil] URI of the corresponding Medusa resource.
   #
   def url_for_uuid(uuid)
-    sprintf('%s/uuids/%s.json', Configuration.instance.medusa_url.chomp('/'),
+    sprintf('%s/uuids/%s.json', Settings.medusa_url.chomp('/'),
             uuid)
   end
 
@@ -47,14 +47,13 @@ class MedusaClient
   def http_client
     unless @http_client
       @http_client = HTTPClient.new do
-        config = Configuration.instance
         self.ssl_config.verify_mode = OpenSSL::SSL::VERIFY_NONE
         self.force_basic_auth = true
         self.receive_timeout = 10000
-        uri    = URI.parse(config.medusa_url)
+        uri    = URI.parse(Settings.medusa_url)
         domain = uri.scheme + '://' + uri.host
-        user   = config.medusa_user
-        secret = config.medusa_secret
+        user   = Settings.medusa_user
+        secret = Settings.medusa_secret
         self.set_auth(domain, user, secret)
       end
     end
