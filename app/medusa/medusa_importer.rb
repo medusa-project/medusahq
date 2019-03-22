@@ -16,7 +16,7 @@ class MedusaImporter
   def import_repositories(client, print_progress, start_time)
     raw_response = client.get(REPOSITORIES_PATH)
     #array of objects
-    json_repositories = JSON.parse(raw_response.json)
+    json_repositories = JSON.parse(raw_response.body)
     json_repositories.each.with_index do |json_repository, index|
       repository = Repository.find_by(uuid: json_repository['uuid']) || Repository.new
       fields = %w(uuid title url notes address_1 address_2 city state zip phone_number email contact_email ldap_admin_group)
