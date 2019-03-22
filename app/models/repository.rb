@@ -10,7 +10,7 @@ class Repository < ApplicationRecord
   def to_param
     uuid
   end
-  
+
   private
 
   def assign_uuid
