@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_22_173809) do
+ActiveRecord::Schema.define(version: 2019_03_22_203758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,23 @@ ActiveRecord::Schema.define(version: 2019_03_22_173809) do
     t.index ["published"], name: "index_collections_on_published"
     t.index ["title"], name: "index_collections_on_title"
     t.index ["uuid"], name: "index_collections_on_uuid", unique: true
+  end
+
+  create_table "repositories", force: :cascade do |t|
+    t.string "uuid"
+    t.string "title"
+    t.string "url"
+    t.text "notes"
+    t.string "address_1"
+    t.string "address_2"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "phone_number"
+    t.string "email"
+    t.string "contact_email"
+    t.string "ldap_admin_group"
+    t.index ["uuid"], name: "index_repositories_on_uuid"
   end
 
   create_table "sessions", force: :cascade do |t|
