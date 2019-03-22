@@ -1,0 +1,17 @@
+= simple_form_for @repository, html: {class: 'form-horizontal'}, wrapper: :horizontal_form do |f|
+  %fieldset
+    %legend Metadata
+    = f.input :title, label: t('title_label')
+    = f.input :url, label: t('url_label')
+    = f.input :uuid, disabled: true, label: t('uuid_label')
+    = f.input :notes, label: t('notes_label')
+    = f.input :address_1, label: t('address_1_label')
+    = f.input :address_2, label: t('address_2_label')
+    = f.input :city, label: t('city_label')
+    = f.input :zip, label: t('zip_label')
+    = f.input :phone_number, label: t('phone_number_label')
+    = f.input :email, label: t('email_label')
+    = f.input :contact_email, label: t('contact_email_label')
+    = f.input :ldap_admin_group, disabled: true, label: t('ldap_admin_group_label')
+
+  = f.submit

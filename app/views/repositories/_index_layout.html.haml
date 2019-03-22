@@ -1,0 +1,6 @@
+%nav{ 'aria-label': :breadcrumb}
+  %ol.breadcrumb
+    %li.breadcrumb-item= link_to('Home', root_path)
+    %li.breadcrumb-item.active= link_to_unless_current('Repositories', repositories_path)
+
+= yield

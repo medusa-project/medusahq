@@ -1,0 +1,32 @@
+= render 'single_layout' do
+
+  %h1 #{@repository.title}
+
+  = link_to 'Edit Repository', edit_repository_path(@repository), class: 'btn btn-primary', 'aria-role': :button
+
+  %section
+    %h2 Metadata
+
+    %dl
+      %dt= t('url_label')
+      %dd= @repository.url
+      %dt= t('uuid_label')
+      %dd= @repository.uuid
+      %dt= t('notes_label')
+      %dd= @repository.notes
+      %dt= t('address_1_label')
+      %dd= @repository.address_1
+      %dt= t('address_2_label')
+      %dd= @repository.address_2
+      %dt= t('city_label')
+      %dd= @repository.city
+      %dt= t('zip_label')
+      %dd= @repository.zip
+      %dt= t('phone_number_label')
+      %dd= @repository.phone_number
+      %dt= t('email_label')
+      %dd= @repository.phone_number
+      %dt= t('contact_email_label')
+      %dd= @repository.contact_email
+      %dt= t('ldap_admin_group_label')
+      %dd= @repository.ldap_admin_group

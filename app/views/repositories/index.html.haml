@@ -1,0 +1,18 @@
+= render 'index_layout' do
+
+  .row.mb-3
+    .col
+      = link_to 'New Repository', new_repository_path, class: 'btn btn-primary float-right', 'aria-role': :button
+
+  = will_paginate @repositories, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
+  %table.table
+    %thead
+      %th Title
+      %th
+    %tbody
+      - @repositories.each do |repository|
+        %tr
+          %td= link_to(repository.title, repository)
+          %td
+            = link_to('Edit', edit_repository_path(repository))
+  = will_paginate @repositories, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
