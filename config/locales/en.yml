@@ -31,12 +31,21 @@
 
 en:
   access_url_label: Access Link (to digital content in another system)
+  address_1_label: "Address 1"
+  address_2_label: "Address 2"
+  city_label: "City"
+  contact_email_label: "Contact Email"
   description_label: Description
+  email_label: "Email"
   external_id_label: "External ID"
+  ldap_admin_group_label: "Ldap Admin Group"
   notes_label: "Notes"
+  phone_number_label: "Phone Number"
   physical_collection_url_label: "Physical Collection Link (finding aid or catalog record)"
   private_description_label: "Internal Collection Description (suppressed from public view)"
   representative_image_id_label: "Representative Image"
   representative_item_id_label: "Representative Item"
   title_label: Title
+  url_label: "Url"
   uuid_label: "UUID"
+  zip_label: "Zip"
