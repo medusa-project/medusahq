@@ -6,6 +6,7 @@ class Repository < ApplicationRecord
                       with: StringUtils::UUID_REGEX,
                       message: 'UUID is invalid'
   validates_presence_of :title
+  has_many :collections, primary_key: :uuid, foreign_key: :repository_uuid
 
   def to_param
     uuid
