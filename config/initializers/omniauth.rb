@@ -1,4 +1,4 @@
-require_relative 'config'
+require_relative 'config_custom'
 Rails.application.config.middleware.use OmniAuth::Builder do
   if Rails.env.production?
     opts = Settings.shibboleth
