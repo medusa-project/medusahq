@@ -1,7 +1,7 @@
 %nav{'aria-label': :breadcrumb}
   %ol.breadcrumb
     %li.breadcrumb-item= link_to('Home', root_path)
-    %li.breadcrumb-item= link_to('Collections', collections_path)
+    %li.breadcrumb-item= link_to(@collection.repository_title, repository_path(@collection.repository))
     %li.breadcrumb-item.active{'aria-current': :page}
       = link_to_unless_current truncate(@collection.title, length: 80), @collection
 
