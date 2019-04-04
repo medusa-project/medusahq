@@ -1,6 +1,6 @@
 class RepositoriesController < ApplicationController
 
-  before_action :get_repository, only: %i(show edit update destroy)
+  before_action :get_repository, only: %i(show edit update destroy update_ldap_admin)
 
   DEFAULT_WINDOW_SIZE = 100
 
@@ -56,10 +56,24 @@ class RepositoriesController < ApplicationController
     end
   end
 
+  def edit_ldap_admins
+
+  end
+
+  def update_ldap_admin
+    @success = @repository.update_attributes(params[:repository].permit(:ldap_admin_domain, :ldap_admin_group))
+    if request.xhr?
+      respond_to { |format| format.js }
+    else
+      flash[:notice] = @success ? 'Update succeeded' : 'Update failed'
+      redirect_to edit_ldap_admins_repositories_path
+    end
+  end
+
   private
 
   def get_repository
-    @repository = Repostiory.find_by(uuid: params[:uuid])
+    @repository = Repository.find_by(uuid: params[:uuid])
   end
 
   def allowed_params

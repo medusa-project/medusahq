@@ -2,8 +2,9 @@
 
   .row.mb-3
     .col
-      = link_to 'New Repository', new_repository_path, class: 'btn btn-primary float-right', 'aria-role': :button
-
+      .float-right
+        = link_to 'New Repository', new_repository_path, class: 'btn btn-primary', 'aria-role': :button
+        = link_to 'Edit Ldap Admins', edit_ldap_admins_repositories_path, class: 'btn btn-primary', 'aria-role': :button
   = will_paginate @repositories, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
   %table.table
     %thead

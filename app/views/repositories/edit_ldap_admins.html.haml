@@ -1,0 +1,12 @@
+= render 'index_layout' do
+  .row.form-group.font-weight-bold
+    .col-4 Repository
+    .col-3 AD group
+    .col-1
+  - Repository.order(:title).each do |repository|
+    %div{id: "ldap_admin_#{repository.id}"}
+      = simple_form_for repository, url: update_ldap_admin_repository_path(repository), remote: true, html: {method: :put, class: 'form-horizontal'} do |f|
+        .row.form-group
+          .col-4.update-highlight= link_to(repository.title, repository)
+          .col-3= f.input_field :ldap_admin_group, class: 'form-control', id: "repository_ldap_admin_group_#{repository.id}"
+          .col-1= f.submit 'Update', class: 'btn btn-primary'

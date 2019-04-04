@@ -1,0 +1,4 @@
+- if @success
+  $("#ldap_admin_#{@repository.id} .update-highlight").effect('highlight', {color: 'green'}, 2500);
+- else
+  alert('Update failed!');

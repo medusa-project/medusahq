@@ -13,6 +13,7 @@
 //= require rails-ujs
 //= require activestorage
 //= require jquery3
+//= require jquery-ui/effects/effect-highlight
 //= require popper
 //= require bootstrap
 //= require_tree .
