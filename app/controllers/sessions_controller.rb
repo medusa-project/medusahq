@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def new
     set_return_url
     if Rails.env.production?
-      redirect_to(shibboleth_login_path(Settings.shibboleth.host))
+      redirect_to(shibboleth_login_path(Settings.host))
     else
       redirect_to('/auth/developer')
     end
