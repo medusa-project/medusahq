@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  web:
+    image: medusahq:latest
+    ports:
+      - 3000:3000
+    environment:
+      RAILS_ENV: development
+      RAILS_CONFIGSET: docker_development
+    restart: always
