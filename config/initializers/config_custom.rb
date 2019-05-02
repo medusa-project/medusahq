@@ -18,7 +18,7 @@
 #Config needs to be loaded, as do the secrets in credentials.yml.enc, before this will work.
 require_relative 'config'
 
-configset = ENV['RUBY_CONFIGSET'] || 'default'
+configset = ENV['RAILS_CONFIGSET'] || 'default'
 config_file = File.join(Rails.root, 'config', 'settings', 'configsets', "#{configset}.yml")
 if File.exist?(config_file)
   Settings.add_source!(config_file)
