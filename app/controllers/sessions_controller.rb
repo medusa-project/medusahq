@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
       return_url = clear_and_return_return_path
       #user = User.find_or_create_by!(uid: auth_hash[:uid], email: auth_hash[:info][:email])
       uid = auth_hash[:uid]
-      user = User.find_or_create_by!(uid: uid.split('@').first, email: uid)
+      user = User.find_or_create_by!(uid: uid, email: uid)
       set_current_user(user)
       redirect_to return_url
     else
