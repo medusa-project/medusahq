@@ -1,1 +1,11 @@
 host: medusahq.library.illinois.edu
+shibboleth:
+  host: medusahq.library.illinois.edu
+  request_type: header
+  uid_field: eppn
+  extra_fields:
+    - eppn
+    - mail
+    - uid
+  info_fields:
+    email: mail
