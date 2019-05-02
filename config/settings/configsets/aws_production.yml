@@ -5,7 +5,3 @@ shibboleth:
   uid_field: eppn
   extra_fields:
     - eppn
-    - mail
-    - uid
-  info_fields:
-    email: mail
