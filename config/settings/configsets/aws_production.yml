@@ -1,3 +1,5 @@
+:dls_url:       https://digital.library.illinois.edu
+:medusa_url:    https://medusa.library.illinois.edu
 host: medusahq.library.illinois.edu
 shibboleth:
   host: medusahq.library.illinois.edu
