@@ -32,3 +32,6 @@
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
+
+docker-build.sh
+docker-push.sh
