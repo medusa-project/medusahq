@@ -74,7 +74,7 @@ class MedusaImporter
                    %w(uuid title url notes address_1 address_2 city state zip phone_number email contact_email ldap_admin_group))
   end
 
-  #Many of these give all the info we need from an index call, in which case we can do this more generically
+  #Many of these give all the info we need from an index call as an array of object, in which case we can do this more generically
   def import_generic(cr_url, klass, key_field, *field_specs)
     raw_response = client.get(cr_url)
     json_objects = JSON.parse(raw_response.body)
