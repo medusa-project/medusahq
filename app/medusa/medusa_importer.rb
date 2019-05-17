@@ -3,7 +3,7 @@ class MedusaImporter
   COLLECTIONS_PATH = '/collections.json'
   REPOSITORIES_PATH = '/repositories.json'
   ACCESS_SYSTEMS_PATH = '/access_systems.json'
-  RESOURCE_TYPES_PATH='/resource_types.json'
+  RESOURCE_TYPES_PATH = '/resource_types.json'
 
   def import(print_progress = false)
     start_time = Time.now
@@ -36,31 +36,25 @@ class MedusaImporter
     end
   end
 
-  #TODO access systems and resource types
-  #TODO parent/child relations
   def import_collections(client, print_progress, start_time)
     list_response = client.get(COLLECTIONS_PATH)
     list_struct = JSON.parse(list_response.body)
+    #this will map parent to child collections by their medusa_ids. At the end we'll use that to set up the
+    # right parent/child collections here by their HQ ids
+    parent_child_collections = Hash.new
     list_struct.each_with_index do |mc, index|
       show_path = mc['path']
       show_response = client.get(show_path + '.json')
       show_struct = JSON.parse(show_response.body)
       c = Collection.find_by(uuid: show_struct['uuid']) || Collection.new
-      c.uuid = show_struct['uuid']
-      c.title = show_struct['title']
-      c.description = show_struct['description']
-      c.description_html = show_struct['description_html']
-      c.private_description = show_struct['private_description'] # TODO: this doesn't exist
-      c.access_url = show_struct['access_url']
-      c.physical_collection_url = show_struct['physical_collection_url']
-      c.external_id = show_struct['external_id']
-      c.published = show_struct['publish']
-      c.representative_image_id = show_struct['representative_image']
-      c.representative_item_id = show_struct['representative_item']
-      c.external_id = show_struct['external_id']
-      c.repository_uuid = show_struct['repository_uuid']
-      c.medusa_id = show_struct['id']
-      c.contact_email = show_struct['contact_email']
+      %w(uuid title description description_html private_description access_url physical_collection_url
+          external_id repository_uuid contact_email).each do |field|
+        c.send("#{field}=", show_struct[field])
+      end
+      {publish: :published, representative_image: :representative_image_id, representative_item: :representative_item_id,
+       id: :medusa_id}.each do |cr_field, hq_field|
+        c.send("#{hq_field}=", show_struct[cr_field.to_s])
+      end
       c.save!
       show_struct['access_systems'].each do |json_access_system|
         name = json_access_system['name']
@@ -72,9 +66,20 @@ class MedusaImporter
         resource_type = ResourceType.find_by(name: name) || raise("Resource Type not found #{name}")
         c.resource_types << resource_type
       end
+      json_child_collections = show_struct['child_collections']
+      if json_child_collections.present?
+        parent_child_collections[c.medusa_id] = json_child_collections.collect(&:id)
+      end
       if print_progress
         StringUtils.print_progress(start_time, index, list_struct.length,
                                    'Importing Collections from Medusa')
+      end
+    end
+    parent_child_collections.each do |parent_medusa_id, child_medusa_ids|
+      parent_collection = Collection.find_by(medusa_id: parent_medusa_id)
+      child_medusa_ids.each do |child_medusa_id|
+        child_collection = Collection.find_by(medusa_id: child_medusa_id)
+        parent_collection.child_collections << child_collection
       end
     end
   end
