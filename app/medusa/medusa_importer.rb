@@ -30,16 +30,11 @@ class MedusaImporter
       show_path = mc['path']
       show_response = client.get(show_path + '.json')
       show_struct = JSON.parse(show_response.body)
-      c = Collection.find_by(uuid: show_struct['uuid']) || Collection.new
-      %w(uuid title description description_html private_description access_url physical_collection_url
-          external_id repository_uuid contact_email).each do |field|
-        c.send("#{field}=", show_struct[field])
-      end
-      {publish: :published, representative_image: :representative_image_id, representative_item: :representative_item_id,
-       id: :medusa_id}.each do |cr_field, hq_field|
-        c.send("#{hq_field}=", show_struct[cr_field.to_s])
-      end
-      c.save!
+      c = import_single_object(Collection, show_struct, 'uuid',
+                               %w(uuid title description description_html private_description access_url
+                                  physical_collection_url external_id repository_uuid contact_email),
+                               {publish: :published, representative_image: :representative_image_id,
+                                representative_item: :representative_item_id, id: :medusa_id})
       show_struct['access_systems'].each do |json_access_system|
         name = json_access_system['name']
         access_system = AccessSystem.find_by(name: name) || raise("Access System not found #{name}")
@@ -83,18 +78,32 @@ class MedusaImporter
   end
 
   #Many of these give all the info we need from an index call, in which case we can do this more generically
-  def import_generic(cr_url, klass, key_field, fields)
+  def import_generic(cr_url, klass, key_field, *field_specs)
     raw_response = client.get(cr_url)
     json_objects = JSON.parse(raw_response.body)
     json_objects.each.with_index do |json_object, index|
-      object = klass.find_by(key_field => json_object[key_field.to_s]) || klass.new
-      fields.each do |field|
-        object.send("#{field}=", json_object[field.to_s])
-      end
-      object.save!
+      import_single_object(klass, json_object, key_field, *field_specs)
       if print_progress
         StringUtils.print_progress(start_time, index, json_objects.length,
                                    "Importing #{klass.to_s.pluralize} from Medusa")
+      end
+    end
+  end
+
+  def import_single_object(klass, json_object, key_field, *field_specs)
+    (klass.find_by(key_field => json_object[key_field.to_s]) || klass.new).tap do |object|
+      set_fields(object, json_object, *field_specs)
+      object.save!
+    end
+  end
+
+  # Each field spec is either a map from the fields in the json to the field names in HQ
+  # or a simple array of field names if they are the same
+  def set_fields(object, json_object, *field_specs)
+    field_specs.each do |field_spec|
+      field_spec = field_spec.zip(field_spec).to_h if field_spec.is_a?(Array)
+      field_spec.each do |json_field, hq_field|
+        object.send("#{hq_field}=", json_object[json_field.to_s])
       end
     end
   end
