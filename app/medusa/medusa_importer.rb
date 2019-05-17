@@ -85,7 +85,7 @@ class MedusaImporter
       import_single_object(klass, json_object, key_field, *field_specs)
       if print_progress
         StringUtils.print_progress(start_time, index, json_objects.length,
-                                   "Importing #{klass.to_s.pluralize} from Medusa")
+                                   "Importing #{klass.to_s.pluralize.underscore.humanize} from Medusa")
       end
     end
   end
