@@ -35,15 +35,20 @@ en:
   address_2_label: "Address 2"
   city_label: "City"
   contact_email_label: "Contact Email"
+  contentdm_alias_label: ContentDM alias
   description_label: Description
   email_label: "Email"
   external_id_label: "External ID"
+  harvestable_label: Harvestable
   ldap_admin_group_label: "Ldap Admin Group"
   medusa_collection_id: "Medusa ID (used for storage key)"
   notes_label: "Notes"
+  ongoing_label: Ongoing
   phone_number_label: "Phone Number"
   physical_collection_url_label: "Physical Collection Link (finding aid or catalog record)"
   private_description_label: "Internal Collection Description (suppressed from public view)"
+  published_label: Published
+  repository_uuid_label: "Repository UUID"
   representative_image_id_label: "Representative Image"
   representative_item_id_label: "Representative Item"
   title_label: Title

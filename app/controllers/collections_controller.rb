@@ -65,7 +65,8 @@ class CollectionsController < ApplicationController
   def allowed_params
     params[:collection].permit(:title, :description, :access_url, :physical_collection_url, :external_id,
                                :representative_image_id, :representative_item_id,
-                               :private_description, :notes, :contact_email)
+                               :private_description, :notes, :contact_email, :contentdm_alias,
+                               :published, :ongoing, :harvestable)
   end
 
 end

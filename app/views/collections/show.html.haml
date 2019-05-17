@@ -31,10 +31,20 @@
     %dl
       %dt= t('uuid_label')
       %dd= @collection.uuid
+      %dt= t(:repository_uuid_label)
+      %dd= @collection.repository_uuid
       %dt= t(:contact_email_label)
       %dd= @collection.contact_email
       %dt= t(:medusa_collection_id)
       %dd= @collection.medusa_id
+      %dt= t(:published_label)
+      %dd= @collection.published
+      %dt= t(:ongoing_label)
+      %dd= @collection.ongoing
+      %dt= t(:harvestable_label)
+      %dd= @collection.harvestable
+      %dt= t(:contentdm_alias_label)
+      %dd= @collection.contentdm_alias
       %dt= t('private_description_label')
       %dd= @collection.private_description
       %dt= t('notes_label')

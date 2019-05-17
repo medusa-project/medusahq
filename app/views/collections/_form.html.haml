@@ -11,8 +11,13 @@
   %fieldset
     %legend Administrative Metadata
     = f.input :uuid, disabled: true, label: t('uuid_label')
+    = f.input :repository_uuid, disabled: true, label: t(:repository_uuid_label)
     = f.input :contact_email, label: t(:contact_email_label)
     = f.input :medusa_id, disabled: true, label: t(:medusa_collection_id)
+    = f.input :published, label: t(:published_label), wrapper: :horizontal_boolean_no_label
+    = f.input :ongoing, label: t(:ongoing_label), wrapper: :horizontal_boolean_no_label
+    = f.input :harvestable, label: t(:harvestable_label), wrapper: :horizontal_boolean_no_label
+    = f.input :contentdm_alias, label: t(:contentdm_alias_label)
     = f.input :private_description, label: t('private_description_label')
     = f.input :notes, label: t('notes_label')
   = f.submit
