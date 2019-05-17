@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_non_logged_in_user
-    session[:login_return_uri] = request.env['REQUEST_URO']
+    session[:login_return_uri] = request.env['REQUEST_URI']
     redirect_to(login_path)
   end
 
