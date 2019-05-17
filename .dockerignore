@@ -25,3 +25,6 @@ config/settings/*.local.yml
 config/environments/*.local.yml
 
 .git/
+
+#ignore master key
+config/master.key
