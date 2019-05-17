@@ -49,10 +49,7 @@ class MedusaImporter
       if json_child_collections.present?
         parent_child_collections[c.medusa_id] = json_child_collections.collect(&:id)
       end
-      if print_progress
-        StringUtils.print_progress(start_time, index, list_struct.length,
-                                   'Importing Collections from Medusa')
-      end
+      maybe_print_progress(index, list_struct, Collection)
     end
     parent_child_collections.each do |parent_medusa_id, child_medusa_ids|
       parent_collection = Collection.find_by(medusa_id: parent_medusa_id)
@@ -83,10 +80,14 @@ class MedusaImporter
     json_objects = JSON.parse(raw_response.body)
     json_objects.each.with_index do |json_object, index|
       import_single_object(klass, json_object, key_field, *field_specs)
-      if print_progress
-        StringUtils.print_progress(start_time, index, json_objects.length,
-                                   "Importing #{klass.to_s.pluralize.underscore.humanize} from Medusa")
-      end
+      maybe_print_progress(index, json_objects, klass)
+    end
+  end
+
+  def maybe_print_progress(index, json_objects, klass)
+    if print_progress
+      StringUtils.print_progress(start_time, index, json_objects.length,
+                                 "Importing #{klass.to_s.pluralize.underscore.humanize} from Medusa")
     end
   end
 
