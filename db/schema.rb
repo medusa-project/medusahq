@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_16_231251) do
+ActiveRecord::Schema.define(version: 2019_05_17_184445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "access_system_collection_joins", force: :cascade do |t|
+    t.bigint "collection_id"
+    t.bigint "access_system_id"
+    t.index ["access_system_id"], name: "index_access_system_collection_joins_on_access_system_id"
+    t.index ["collection_id", "access_system_id"], name: "index_access_system_collection_joins_on_both_ids", unique: true
+    t.index ["collection_id"], name: "index_access_system_collection_joins_on_collection_id"
+  end
+
+  create_table "access_systems", force: :cascade do |t|
+    t.string "name"
+    t.string "service_owner"
+    t.string "application_manager"
+  end
+
+  create_table "collection_resource_type_joins", force: :cascade do |t|
+    t.bigint "collection_id"
+    t.bigint "resource_type_id"
+    t.index ["collection_id", "resource_type_id"], name: "index_collection_resource_type_joins_on_both_ids", unique: true
+    t.index ["collection_id"], name: "index_collection_resource_type_joins_on_collection_id"
+    t.index ["resource_type_id"], name: "index_collection_resource_type_joins_on_resource_type_id"
+  end
 
   create_table "collections", force: :cascade do |t|
     t.string "uuid", null: false
@@ -63,6 +85,10 @@ ActiveRecord::Schema.define(version: 2019_05_16_231251) do
     t.index ["uuid"], name: "index_repositories_on_uuid"
   end
 
+  create_table "resource_types", force: :cascade do |t|
+    t.string "name"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.string "session_id", null: false
     t.text "data"
@@ -72,9 +98,21 @@ ActiveRecord::Schema.define(version: 2019_05_16_231251) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
+  create_table "subcollection_joins", force: :cascade do |t|
+    t.integer "parent_collection_id", null: false
+    t.integer "child_collection_id", null: false
+    t.index ["child_collection_id"], name: "index_subcollection_joins_on_child_collection_id"
+    t.index ["parent_collection_id", "child_collection_id"], name: "index_subcollection_joins_on_both_ids", unique: true
+    t.index ["parent_collection_id"], name: "index_subcollection_joins_on_parent_collection_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "uid"
     t.string "email"
   end
 
+  add_foreign_key "access_system_collection_joins", "access_systems"
+  add_foreign_key "access_system_collection_joins", "collections"
+  add_foreign_key "collection_resource_type_joins", "collections"
+  add_foreign_key "collection_resource_type_joins", "resource_types"
 end
