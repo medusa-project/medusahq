@@ -15,6 +15,8 @@ namespace :medusa do
   task clear_content: :environment do
     Collection.destroy_all
     Repository.destroy_all
+    AccessSystem.destroy_all
+    ResourceType.destroy_all
   end
 
 
