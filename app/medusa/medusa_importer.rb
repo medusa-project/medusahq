@@ -57,7 +57,7 @@ class MedusaImporter
       c.save!
       if print_progress
         StringUtils.print_progress(start_time, index, list_struct.length,
-                                   'Importing Collecions from Medusa')
+                                   'Importing Collections from Medusa')
       end
     end
   end
