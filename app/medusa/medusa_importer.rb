@@ -1,42 +1,26 @@
 class MedusaImporter
 
+  attr_accessor :start_time, :client, :print_progress
+
   COLLECTIONS_PATH = '/collections.json'
   REPOSITORIES_PATH = '/repositories.json'
   ACCESS_SYSTEMS_PATH = '/access_systems.json'
   RESOURCE_TYPES_PATH = '/resource_types.json'
 
   def import(print_progress = false)
-    start_time = Time.now
-    client = MedusaClient.instance
+    self.start_time = Time.now
+    self.client = MedusaClient.instance
+    self.print_progress = print_progress
 
-    import_access_systems(client, print_progress, start_time)
-    import_resource_types(client, print_progress, start_time)
-    import_repositories(client, print_progress, start_time)
-    import_collections(client, print_progress, start_time)
+    import_access_systems
+    import_resource_types
+    import_repositories
+    import_collections
   end
 
   private
 
-  #a little bit easier than collections, since the index exports all the relevant information
-  def import_repositories(client, print_progress, start_time)
-    raw_response = client.get(REPOSITORIES_PATH)
-    #array of objects
-    json_repositories = JSON.parse(raw_response.body)
-    json_repositories.each.with_index do |json_repository, index|
-      repository = Repository.find_by(uuid: json_repository['uuid']) || Repository.new
-      fields = %w(uuid title url notes address_1 address_2 city state zip phone_number email contact_email ldap_admin_group)
-      fields.each do |field|
-        repository.send("#{field}=", json_repository[field])
-      end
-      repository.save!
-      if print_progress
-        StringUtils.print_progress(start_time, index, json_repositories.length,
-                                   'Importing Repositories from Medusa')
-      end
-    end
-  end
-
-  def import_collections(client, print_progress, start_time)
+  def import_collections
     list_response = client.get(COLLECTIONS_PATH)
     list_struct = JSON.parse(list_response.body)
     #this will map parent to child collections by their medusa_ids. At the end we'll use that to set up the
@@ -84,36 +68,33 @@ class MedusaImporter
     end
   end
 
-  def import_access_systems(client, print_progress, start_time)
-    raw_response = client.get(ACCESS_SYSTEMS_PATH)
-    json_access_systems = JSON.parse(raw_response.body)
-    json_access_systems.each.with_index do |json_access_system, index|
-      access_system = AccessSystem.find_by(name: json_access_system['name']) || AccessSystem.new
-      fields = %w(name service_owner application_manager)
-      fields.each do |field|
-        access_system.send("#{field}=", json_access_system[field])
-      end
-      access_system.save!
-      if print_progress
-        StringUtils.print_progress(start_time, index, json_access_systems.length,
-                                   'Importing Access Systems from Medusa')
-      end
-    end
+  def import_access_systems
+    import_generic(ACCESS_SYSTEMS_PATH, AccessSystem, 'name', %w(name service_owner application_manager))
   end
 
-  def import_resource_types(client, print_progress, start_time)
-    raw_response = client.get(RESOURCE_TYPES_PATH)
-    json_resource_types = JSON.parse(raw_response.body)
-    json_resource_types.each.with_index do |json_resource_type, index|
-      resource_type = ResourceType.find_by(name: json_resource_type['name']) || ResourceType.new
-      fields = %w(name)
+  def import_resource_types
+    import_generic(RESOURCE_TYPES_PATH, ResourceType, 'name', %w(name))
+  end
+
+  #a little bit easier than collections, since the index exports all the relevant information
+  def import_repositories
+    import_generic(REPOSITORIES_PATH, Repository, 'uuid',
+                   %w(uuid title url notes address_1 address_2 city state zip phone_number email contact_email ldap_admin_group))
+  end
+
+  #Many of these give all the info we need from an index call, in which case we can do this more generically
+  def import_generic(cr_url, klass, key_field, fields)
+    raw_response = client.get(cr_url)
+    json_objects = JSON.parse(raw_response.body)
+    json_objects.each.with_index do |json_object, index|
+      object = klass.find_by(key_field => json_object[key_field.to_s]) || klass.new
       fields.each do |field|
-        resource_type.send("#{field}=", json_resource_type[field])
+        object.send("#{field}=", json_object[field.to_s])
       end
-      resource_type.save!
+      object.save!
       if print_progress
-        StringUtils.print_progress(start_time, index, json_access_systems.length,
-                                   'Importing Access Systems from Medusa')
+        StringUtils.print_progress(start_time, index, json_objects.length,
+                                   "Importing #{klass.to_s.pluralize} from Medusa")
       end
     end
   end
