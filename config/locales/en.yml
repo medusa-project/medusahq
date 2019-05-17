@@ -39,6 +39,7 @@ en:
   email_label: "Email"
   external_id_label: "External ID"
   ldap_admin_group_label: "Ldap Admin Group"
+  medusa_collection_id: "Medusa ID (used for storage key)"
   notes_label: "Notes"
   phone_number_label: "Phone Number"
   physical_collection_url_label: "Physical Collection Link (finding aid or catalog record)"

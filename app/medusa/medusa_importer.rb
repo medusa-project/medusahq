@@ -52,6 +52,8 @@ class MedusaImporter
       c.representative_item_id = show_struct['representative_item']
       c.external_id = show_struct['external_id']
       c.repository_uuid = show_struct['repository_uuid']
+      c.medusa_id = show_struct['id']
+      c.contact_email = show_struct['contact_email']
       c.save!
       if print_progress
         StringUtils.print_progress(start_time, index, list_struct.length,
