@@ -20,7 +20,7 @@ class Collection < ApplicationRecord
   has_many :parent_collections, -> { order('title ASC') }, through: :parent_collection_joins
 
   delegate :title, to: :repository, prefix: true
-  
+
   def to_param
     self.uuid
   end

@@ -62,6 +62,16 @@ class MedusaImporter
       c.medusa_id = show_struct['id']
       c.contact_email = show_struct['contact_email']
       c.save!
+      show_struct['access_systems'].each do |json_access_system|
+        name = json_access_system['name']
+        access_system = AccessSystem.find_by(name: name) || raise("Access System not found #{name}")
+        c.access_systems << access_system
+      end
+      show_struct['resource_types'].each do |json_resource_type|
+        name = json_resource_type['name']
+        resource_type = ResourceType.find_by(name: name) || raise("Resource Type not found #{name}")
+        c.resource_types << resource_type
+      end
       if print_progress
         StringUtils.print_progress(start_time, index, list_struct.length,
                                    'Importing Collections from Medusa')
