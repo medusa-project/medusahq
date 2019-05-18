@@ -38,16 +38,16 @@ class MedusaImporter
       show_struct['access_systems'].each do |json_access_system|
         name = json_access_system['name']
         access_system = AccessSystem.find_by(name: name) || raise("Access System not found #{name}")
-        c.access_systems << access_system
+        c.access_systems << access_system unless c.access_systems.include?(access_system)
       end
       show_struct['resource_types'].each do |json_resource_type|
         name = json_resource_type['name']
         resource_type = ResourceType.find_by(name: name) || raise("Resource Type not found #{name}")
-        c.resource_types << resource_type
+        c.resource_types << resource_type unless c.resource_types.include?(resource_type)
       end
       json_child_collections = show_struct['child_collections']
       if json_child_collections.present?
-        parent_child_collections[c.medusa_id] = json_child_collections.collect(&:id)
+        parent_child_collections[c.medusa_id] = json_child_collections.collect {|collection| collection['id'] }
       end
       maybe_print_progress(index, list_struct, Collection)
     end
