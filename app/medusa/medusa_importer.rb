@@ -55,7 +55,7 @@ class MedusaImporter
       parent_collection = Collection.find_by(medusa_id: parent_medusa_id)
       child_medusa_ids.each do |child_medusa_id|
         child_collection = Collection.find_by(medusa_id: child_medusa_id)
-        parent_collection.child_collections << child_collection
+        parent_collection.child_collections << child_collection unless parent_collection.child_collections.include?(child_collection)
       end
     end
   end
