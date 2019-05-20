@@ -25,6 +25,34 @@
       %dt= t('representative_item_id_label')
       %dd= @collection.representative_item_id
 
+  - if @collection.resource_types.present?
+    %section
+      %h2 Resource Types
+      %ul
+        - @collection.resource_types.order(:name).each do |resource_type|
+          %li= resource_type.name
+
+  - if @collection.access_systems.present?
+    %section
+      %h2 Access Systems
+      %ul
+        - @collection.access_systems.order(:name).each do |access_system|
+          %li= link_to(access_system.name, access_system)
+
+  - if @collection.parent_collections.present?
+    %section
+      %h2 Parent Collections
+      %ul
+        - @collection.parent_collections.order(:title).each do |parent_collection|
+          %li= link_to(parent_collection.title, parent_collection)
+
+  - if @collection.child_collections.present?
+    %section
+      %h2 Child Collections
+      %ul
+        - @collection.child_collections.order(:title).each do |child_collection|
+          %li= link_to(child_collection.title, child_collection)
+
   %section
     %h2 Administrative Metadata
 

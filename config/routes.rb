@@ -9,7 +9,8 @@ Rails.application.routes.draw do
     get :edit_ldap_admins, on: :collection
     put :update_ldap_admin, on: :member
   end
-
+  resources :access_systems
+  
   #auth routes
   match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
   match '/login', to: 'sessions#new', as: :login, via: [:get, :post]
