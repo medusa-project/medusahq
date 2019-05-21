@@ -66,7 +66,8 @@ class CollectionsController < ApplicationController
     params[:collection].permit(:title, :description, :access_url, :physical_collection_url, :external_id,
                                :representative_image_id, :representative_item_id,
                                :private_description, :notes, :contact_email, :contentdm_alias,
-                               :published, :ongoing, :harvestable)
+                               :published, :ongoing, :harvestable,
+                               resource_type_ids: [], access_system_ids: [], child_collection_ids: [])
   end
 
 end

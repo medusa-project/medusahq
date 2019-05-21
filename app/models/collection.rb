@@ -2,6 +2,7 @@ class Collection < ApplicationRecord
 
   before_validation :assign_uuid, on: :create
   before_create :ensure_medusa_id
+  before_save :nullify_blank_contentdm_alias
 
   validates_format_of :uuid,
                       with: StringUtils::UUID_REGEX,
@@ -39,10 +40,20 @@ class Collection < ApplicationRecord
     self.medusa_id ||= self.class.max(:medusa_id) + 1
   end
 
+  def peer_collections
+    repository.collections.order(:title).where.not(id: id)
+  end
+
   private
 
   def assign_uuid
     self.uuid ||= SecureRandom.uuid
+  end
+
+  #This is necessary because of the unique index on contentdb_alias, i.e. we need a NULL value there rather than
+  # just a blank string.
+  def nullify_blank_contentdm_alias
+    self.contentdm_alias = nil if contentdm_alias.blank?
   end
 
 end

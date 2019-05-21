@@ -20,4 +20,16 @@
     = f.input :contentdm_alias, label: t(:contentdm_alias_label)
     = f.input :private_description, label: t('private_description_label')
     = f.input :notes, label: t('notes_label')
+  %fieldset
+    %legend Resource Types
+    = f.association :resource_types, as: :check_boxes, wrapper: :horizontal_collection, label: false
+  %fieldset
+    %legend Access Systems
+    = f.association :access_systems, as: :check_boxes, wrapper: :horizontal_collection, label: false
+  %fieldset
+    %legend Child Collections
+    - if @collection.repository.present?
+      = f.association :child_collections, as: :check_boxes, label: false, collection: @collection.peer_collections
+    - else
+      No subcollections are available until this collection is saved with a repository
   = f.submit
