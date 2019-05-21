@@ -4,17 +4,4 @@
     .col
       = link_to 'New Collection', new_collection_path, class: 'btn btn-primary float-right', 'aria-role': :button
 
-  = will_paginate @collections, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
-  %table.table
-    %thead
-      %th= t('external_id_label')
-      %th= t('title_label')
-      %th
-    %tbody
-      - @collections.each do |collection|
-        %tr
-          %td= collection.external_id
-          %td= link_to(collection.title, collection)
-          %td
-            = link_to('Edit', edit_collection_path(collection))
-  = will_paginate @collections, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
+  = render 'index_table'

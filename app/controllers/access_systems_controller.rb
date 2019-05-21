@@ -1,6 +1,6 @@
 class AccessSystemsController < ApplicationController
 
-  before_action :get_access_system, only: %i(show edit update destroy)
+  before_action :get_access_system, only: %i(show edit update destroy collections)
 
   def index
     @access_systems = AccessSystem.all.order(:name)
@@ -41,6 +41,13 @@ class AccessSystemsController < ApplicationController
     else
       redirect_back alert: 'Unknown error deleting access system.', fallback_location: access_systems_path
     end
+  end
+
+  def collections
+    @per_page = params[:per_page]&.to_i || 100
+    @page = params[:page]&.to_i || 1
+
+    @collections = @access_system.collections.order(:title).paginate(per_page: @per_page, page: @page).includes(:repository)
   end
 
   protected
