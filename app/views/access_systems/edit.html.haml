@@ -1,0 +1,4 @@
+= render 'single_layout' do
+  = link_to 'Delete Access System', access_system_path(@access_system), method: :delete, 'data-confirm': 'Are you sure? This cannot be undone.', class: 'btn btn-danger float-right', 'aria-role': :button
+  %br
+  = render 'form'

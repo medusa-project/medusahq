@@ -1,0 +1,15 @@
+= render 'single_layout' do
+
+  %h1 #{@access_system.name}
+
+  = link_to 'Edit Access System', edit_access_system_path(@access_system), class: 'btn btn-primary', 'aria-role': :button
+
+  %section
+
+    %dl
+      %dt= t('name_label')
+      %dd= @access_system.name
+      %dt= t('service_owner_label')
+      %dd= @access_system.service_owner
+      %dt= t('application_manager_label')
+      %dd= @access_system.application_manager

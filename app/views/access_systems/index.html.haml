@@ -1,0 +1,19 @@
+= render 'index_layout' do
+
+  .row.mb-3
+    .col
+      = link_to 'New Access System', new_access_system_path, class: 'btn btn-primary float-right', 'aria-role': :button
+
+  %table.table
+    %thead
+      %th= t('name_label')
+      %th= t('service_owner_label')
+      %th= t('application_manager_label')
+      %th
+    %tbody
+      - @access_systems.each do |access_system|
+        %tr
+          %td= link_to access_system.name, access_system
+          %td= access_system.service_owner
+          %td= access_system.application_manager
+          %td= link_to('Edit', edit_access_system_path(access_system))

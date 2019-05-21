@@ -33,6 +33,7 @@ en:
   access_url_label: Access Link (to digital content in another system)
   address_1_label: "Address 1"
   address_2_label: "Address 2"
+  application_manager_label: Application Manager
   city_label: "City"
   contact_email_label: "Contact Email"
   contentdm_alias_label: ContentDM alias
@@ -42,6 +43,7 @@ en:
   harvestable_label: Harvestable
   ldap_admin_group_label: "Ldap Admin Group"
   medusa_collection_id: "Medusa ID (used for storage key)"
+  name_label: Name
   notes_label: "Notes"
   ongoing_label: Ongoing
   phone_number_label: "Phone Number"
@@ -51,6 +53,7 @@ en:
   repository_uuid_label: "Repository UUID"
   representative_image_id_label: "Representative Image"
   representative_item_id_label: "Representative Item"
+  service_owner_label: Service Owner
   title_label: Title
   url_label: "Url"
   uuid_label: "UUID"

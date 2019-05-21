@@ -7,8 +7,8 @@
   = will_paginate @collections, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
   %table.table
     %thead
-      %th External ID
-      %th Title
+      %th= t('external_id_label')
+      %th= t('title_label')
       %th
     %tbody
       - @collections.each do |collection|

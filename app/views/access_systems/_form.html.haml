@@ -1,0 +1,7 @@
+= simple_form_for @access_system, html: {class: 'form-horizontal'}, wrapper: :horizontal_form do |f|
+  %fieldset
+    %legend Access System data
+    = f.input :name, label: t('name_label')
+    = f.input :service_owner, label: t('service_owner_label')
+    = f.input :application_manager, label: t('application_manager_label')
+  = f.submit
