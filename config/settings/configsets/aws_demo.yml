@@ -1,3 +1,5 @@
+:dls_url:       https://demo.digital.library.illinois.edu
+:medusa_url:    https://demo.medusa.library.illinois.edu
 host: demo.medusahq.library.illinois.edu
 shibboleth:
   host: demo.medusahq.library.illinois.edu
