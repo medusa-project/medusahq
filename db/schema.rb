@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_17_184445) do
+ActiveRecord::Schema.define(version: 2019_05_24_183618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,13 @@ ActiveRecord::Schema.define(version: 2019_05_17_184445) do
     t.index ["collection_id", "resource_type_id"], name: "index_collection_resource_type_joins_on_both_ids", unique: true
     t.index ["collection_id"], name: "index_collection_resource_type_joins_on_collection_id"
     t.index ["resource_type_id"], name: "index_collection_resource_type_joins_on_resource_type_id"
+  end
+
+  create_table "collection_virtual_repository_joins", force: :cascade do |t|
+    t.integer "collection_id", null: false
+    t.integer "virtual_repository_id", null: false
+    t.index ["collection_id"], name: "collection_virtual_repository_joins_on_c_id"
+    t.index ["virtual_repository_id", "collection_id"], name: "collection_virtual_repository_joins_on_both_ids", unique: true
   end
 
   create_table "collections", force: :cascade do |t|
@@ -111,8 +118,15 @@ ActiveRecord::Schema.define(version: 2019_05_17_184445) do
     t.string "email"
   end
 
+  create_table "virtual_repositories", force: :cascade do |t|
+    t.bigint "repository_id"
+    t.string "title"
+    t.index ["repository_id"], name: "index_virtual_repositories_on_repository_id"
+  end
+
   add_foreign_key "access_system_collection_joins", "access_systems"
   add_foreign_key "access_system_collection_joins", "collections"
   add_foreign_key "collection_resource_type_joins", "collections"
   add_foreign_key "collection_resource_type_joins", "resource_types"
+  add_foreign_key "virtual_repositories", "repositories"
 end
