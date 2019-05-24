@@ -6,6 +6,7 @@ class MedusaImporter
   REPOSITORIES_PATH = '/repositories.json'
   ACCESS_SYSTEMS_PATH = '/access_systems.json'
   RESOURCE_TYPES_PATH = '/resource_types.json'
+  VIRTUAL_REPOSITORIES_PATH = '/virtual_repositories.json'
 
   def import(print_progress = false)
     self.start_time = Time.now
@@ -16,6 +17,7 @@ class MedusaImporter
     import_resource_types
     import_repositories
     import_collections
+    import_virtual_repositories
   end
 
   private
@@ -72,6 +74,19 @@ class MedusaImporter
   def import_repositories
     import_generic(REPOSITORIES_PATH, Repository, 'uuid',
                    %w(uuid title url notes address_1 address_2 city state zip phone_number email contact_email ldap_admin_group))
+  end
+
+  def import_virtual_repositories
+    raw_response = client.get(VIRTUAL_REPOSITORIES_PATH)
+    json_objects = JSON.parse(raw_response.body)
+    json_objects.each do |json_object|
+      repository = Repository.find_by(uuid: json_object['repository_uuid'])
+      virtual_repository = VirtualRepository.find_or_create_by!(repository: repository, title: json_object['title'])
+      json_object['collections'].each do |collection|
+        collection = Collection.find_by(uuid: collection['uuid'])
+        virtual_repository.collections << collection unless virtual_repository.collections.include?(collection)
+      end
+    end
   end
 
   #Many of these give all the info we need from an index call as an array of object, in which case we can do this more generically
