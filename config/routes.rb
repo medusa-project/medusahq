@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     get :collections, on: :member
   end
 
+  resources :virtual_repositories
+
   #auth routes
   match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
   match '/login', to: 'sessions#new', as: :login, via: [:get, :post]

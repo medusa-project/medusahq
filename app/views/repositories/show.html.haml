@@ -35,3 +35,9 @@
   %section
     %h2 Collections
     = render 'collections/index_table'
+
+  - if @repository.virtual_repositories.present?
+    - @virtual_repositories = @repository.virtual_repositories
+    %section
+      %h2 Virtual Repositories
+      = render 'virtual_repositories/index_table'
