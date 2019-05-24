@@ -20,7 +20,12 @@ class RepositoriesController < ApplicationController
   # Responds to GET /repositories/:uuid
   #
   def show
+    @per_page = params[:per_page]&.to_i || 25
+    @page = params[:page]&.to_i || 1
+    @start = (@page - 1) * @per_page
 
+    @count = @repository.collections.count
+    @collections = @repository.collections.order(:title).paginate(per_page: @per_page, page: @page)
   end
 
   def edit

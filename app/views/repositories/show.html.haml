@@ -30,3 +30,8 @@
       %dd= @repository.contact_email
       %dt= t('ldap_admin_group_label')
       %dd= @repository.ldap_admin_group
+
+
+  %section
+    %h2 Collections
+    = render 'collections/index_table'
