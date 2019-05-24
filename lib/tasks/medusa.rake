@@ -13,6 +13,7 @@ namespace :medusa do
 
   desc 'Remove current imported content'
   task clear_content: :environment do
+    VirtualRepository.destroy_all
     Collection.destroy_all
     Repository.destroy_all
     AccessSystem.destroy_all
