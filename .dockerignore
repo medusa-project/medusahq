@@ -28,3 +28,5 @@ config/environments/*.local.yml
 
 #ignore master key
 config/master.key
+
+rails-container-scripts/
