@@ -9,6 +9,7 @@
         More
       .dropdown-menu{'aria-labelledby': 'navbar-more-link'}
         = link_to('Access Systems', access_systems_path, class: 'dropdown-item')
+        = link_to('Virtual Repositories', virtual_repositories_path, class: 'dropdown-item')
     - if current_user
       = link_to("Logout (#{current_user.uid})", logout_path, class: 'nav-link nav-item')
     - else
