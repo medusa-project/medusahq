@@ -7,6 +7,7 @@ class Repository < ApplicationRecord
                       message: 'UUID is invalid'
   validates_presence_of :title
   has_many :collections, primary_key: :uuid, foreign_key: :repository_uuid
+  has_many :virtual_repositories, dependent: :destroy
 
   def to_param
     uuid
