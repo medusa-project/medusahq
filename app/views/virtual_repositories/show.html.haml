@@ -1,0 +1,15 @@
+= render 'single_layout' do
+
+  = link_to 'Edit Virtual Repository', edit_virtual_repository_path(@virtual_repository), class: 'btn btn-primary', 'aria-role': :button
+
+  %section
+    %h2 Descriptive Metadata
+    %dl
+      %dt= t('title_label')
+      %dd= @virtual_repository.title
+
+  %section
+    %h2 Collections
+    %ul
+      - @virtual_repository.collections.order(:title).each do |collection|
+        %li= link_to(collection.title, collection)
