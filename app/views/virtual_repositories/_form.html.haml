@@ -1,0 +1,10 @@
+= simple_form_for @virtual_repository, html: {class: 'form-horizontal'}, wrapper: :horizontal_form do |f|
+  = f.submit
+  %fieldset
+    %legend Descriptive Metadata
+    = f.input :repository_id, as: :hidden
+    = f.input :title, label: t('title_label')
+  %fieldset
+    %legend Collections
+    = f.association :collections, as: :check_boxes, label: false, collection: @virtual_repository.repository.collections.order(:title)
+  = f.submit
