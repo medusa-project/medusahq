@@ -1,7 +1,7 @@
 class Collection < ApplicationRecord
 
   before_validation :assign_uuid, on: :create
-  before_create :ensure_medusa_id
+  before_validation :ensure_medusa_id, on: :create
   before_save :nullify_blank_contentdm_alias
 
   validates_format_of :uuid,
