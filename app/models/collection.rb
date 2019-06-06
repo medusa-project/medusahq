@@ -37,7 +37,7 @@ class Collection < ApplicationRecord
   # which is used in keying the objects in storage. So when collections start to get created here we'll want to use
   # that same concept to do that, and of course we need to preserve those ids to connect to existing data.
   def ensure_medusa_id
-    self.medusa_id ||= self.class.max(:medusa_id) + 1
+    self.medusa_id ||= (self.class.maximum(:medusa_id) || 0) + 1
   end
 
   def peer_collections
