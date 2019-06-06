@@ -30,3 +30,5 @@ config/environments/*.local.yml
 config/master.key
 
 rails-container-scripts/
+
+coverage/
