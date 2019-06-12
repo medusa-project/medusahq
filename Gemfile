@@ -48,6 +48,10 @@ end
 
 group :test do
   gem 'simplecov'
+  gem 'minitest-matchers_vaccine'
+  gem 'shoulda', '~> 3.5'
+  gem 'shoulda-matchers', '~> 2.0'
+  gem 'rspec-expectations'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
