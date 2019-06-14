@@ -82,7 +82,7 @@ class AccessSystemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'access system bad create' do
-    assert_difference 'AccessSystem.count', 0 do
+    assert_no_difference 'AccessSystem.count' do
       post access_systems_path(access_system: {name: '', service_owner: 'newowner@example.com'})
     end
     assert_select 'form#new_access_system'

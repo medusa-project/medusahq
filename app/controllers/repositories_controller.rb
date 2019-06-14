@@ -66,7 +66,7 @@ class RepositoriesController < ApplicationController
   end
 
   def update_ldap_admin
-    @success = @repository.update_attributes(params[:repository].permit(:ldap_admin_domain, :ldap_admin_group))
+    @success = @repository.update_attributes(params[:repository].permit(:ldap_admin_group))
     if request.xhr?
       respond_to { |format| format.js }
     else
