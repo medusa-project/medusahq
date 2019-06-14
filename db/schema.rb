@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_24_183618) do
+ActiveRecord::Schema.define(version: 2019_06_14_201354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,13 @@ ActiveRecord::Schema.define(version: 2019_05_24_183618) do
     t.string "repository_uuid"
     t.string "contact_email"
     t.integer "medusa_id", null: false
+    t.integer "descriptive_element_id"
+    t.integer "medusa_cfs_directory_id"
+    t.integer "medusa_file_group_id"
+    t.integer "metadata_profile_id"
+    t.integer "package_profile_id"
+    t.boolean "published_in_dls"
+    t.string "rightsstatements_org_uri"
     t.index ["contentdm_alias"], name: "index_collections_on_contentdm_alias", unique: true
     t.index ["external_id"], name: "index_collections_on_external_id"
     t.index ["harvestable"], name: "index_collections_on_harvestable"
