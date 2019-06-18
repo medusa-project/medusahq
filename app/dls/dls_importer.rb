@@ -25,6 +25,8 @@ class DlsImporter
       update_collection(collection, JSON.parse(response.body))
     when 403
       #puts "Skipping unpublished or unknown collection uuid: #{collection.uuid}"
+    when 404
+      # do nothing
     else
       raise "Unexpected response from DLS server: #{response.code}. Collection UUID: #{collection.uuid}"
     end
