@@ -1,12 +1,13 @@
 namespace :medusa do
 
-  desc 'Import content from Medusa'
+  desc 'Import content from Medusa and DLS'
   task :import => :environment do |task, args|
     MedusaImporter.new.import(true)
+    DlsImporter.new.import_collections
     puts "\nDone"
   end
 
-  desc 'Import content from Medusa, removing old content first'
+  desc 'Import content from Medusa and DLS, removing old content first'
   task :fresh_import => [:clear_content, :import] do |task, args|
     #just do required tasks
   end

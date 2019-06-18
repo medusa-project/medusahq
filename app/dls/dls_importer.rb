@@ -7,8 +7,11 @@ class DlsImporter
   end
 
   def import_collections
+    puts "Importing DLS collection information"
+    progress_bar = ProgressBar.new(Collection.count)
     Collection.all.each do |collection|
       import_collection(collection)
+      progress_bar.increment!
     end
   end
 
@@ -21,15 +24,19 @@ class DlsImporter
     when 200
       update_collection(collection, JSON.parse(response.body))
     when 403
-      puts "Skipping unpublished or unknown collection uuid: #{collection.uuid}"
+      #puts "Skipping unpublished or unknown collection uuid: #{collection.uuid}"
     else
       raise "Unexpected response from DLS server: #{response.code}. Collection UUID: #{collection.uuid}"
     end
   end
 
   def update_collection(collection, dls_hash)
-    #TODO - whatever we need to here to update collection
-    puts "Importing collection uuid: #{collection.uuid}"
+    collection.published_in_dls = dls_hash['published']
+    collection.medusa_cfs_directory_id = dls_hash['medusa_cfs_directory_id']
+    collection.medusa_file_group_id = dls_hash['medusa_file_group_id']
+    collection.rightsstatements_org_uri = dls_hash['rightsstatements_org_uri']
+    collection.package_profile = dls_hash['package_profile']
+    collection.save!
   end
 
   def collection_path(collection)
