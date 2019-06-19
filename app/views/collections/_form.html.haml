@@ -14,9 +14,14 @@
     = f.input :repository_uuid, disabled: true, label: t(:repository_uuid_label)
     = f.input :contact_email, label: t(:contact_email_label)
     = f.input :medusa_id, disabled: true, label: t(:medusa_collection_id)
+    = f.input :medusa_file_group_id, label: t(:medusa_file_group_id_label)
+    = f.input :medusa_cfs_directory_id, label: t(:medusa_cfs_directory_id_label)
     = f.input :published, label: t(:published_label), wrapper: :horizontal_boolean_no_label
+    = f.input :published_in_dls, label: t(:published_in_dls_label), wrapper: :horizontal_boolean_no_label
     = f.input :ongoing, label: t(:ongoing_label), wrapper: :horizontal_boolean_no_label
     = f.input :harvestable, label: t(:harvestable_label), wrapper: :horizontal_boolean_no_label
+    = f.input :package_profile, label: t(:package_profile_label), as: :select, collection: Settings.package_profiles, allow_blank: true
+    = f.input :rightsstatements_org_uri, label: t(:rightsstatements_org_uri_label)
     = f.input :contentdm_alias, label: t(:contentdm_alias_label)
     = f.input :private_description, label: t('private_description_label')
     = f.input :notes, label: t('notes_label')

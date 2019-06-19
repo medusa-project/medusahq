@@ -8,6 +8,7 @@ class Collection < ApplicationRecord
                       with: StringUtils::UUID_REGEX,
                       message: 'UUID is invalid'
   validates_presence_of :title
+  validates_inclusion_of :package_profile, in: Settings.package_profiles, allow_blank: true
   belongs_to :repository, primary_key: :uuid, foreign_key: :repository_uuid
   has_many :access_system_collection_joins, dependent: :destroy
   has_many :access_systems, -> {order(:name)}, through: :access_system_collection_joins

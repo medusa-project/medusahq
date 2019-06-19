@@ -61,4 +61,8 @@ class CollectionTest < ActiveSupport::TestCase
     must delegate_method(:title).to(:repository).with_prefix(true)
   end
 
+  test 'validate package profile' do
+    must validate_inclusion_of(:package_profile).in_array(Settings.package_profiles).allow_blank(true)
+  end
+
 end

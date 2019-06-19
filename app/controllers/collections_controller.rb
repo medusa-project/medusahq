@@ -69,7 +69,9 @@ class CollectionsController < ApplicationController
     params[:collection].permit(:title, :description, :access_url, :physical_collection_url, :external_id,
                                :representative_image_id, :representative_item_id,
                                :private_description, :notes, :contact_email, :contentdm_alias,
-                               :published, :ongoing, :harvestable, :repository_uuid,
+                               :published, :published_in_dls, :ongoing, :harvestable, :repository_uuid,
+                               :medusa_file_group_id, :medusa_cfs_directory_id,
+                               :rightsstatements_org_uri, :package_profile,
                                resource_type_ids: [], access_system_ids: [], child_collection_ids: [])
   end
 

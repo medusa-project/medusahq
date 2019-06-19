@@ -1,1 +1,5 @@
-
+package_profiles:
+  - Free-Form
+  - Compound Object
+  - Single-Item Object
+  - Mixed Media
