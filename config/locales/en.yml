@@ -42,17 +42,22 @@ en:
   external_id_label: "External ID"
   harvestable_label: Harvestable
   ldap_admin_group_label: "Ldap Admin Group"
+  medusa_cfs_directory_id_label: "Medusa Cfs Directory ID"
   medusa_collection_id: "Medusa ID (used for storage key)"
+  medusa_file_group_id_label: "Medusa File Group ID"
   name_label: Name
   notes_label: "Notes"
   ongoing_label: Ongoing
+  package_profile_label: "Package Profile"
   phone_number_label: "Phone Number"
   physical_collection_url_label: "Physical Collection Link (finding aid or catalog record)"
   private_description_label: "Internal Collection Description (suppressed from public view)"
+  published_in_dls_label: "Published In DLS"
   published_label: Published
   repository_uuid_label: "Repository UUID"
   representative_image_id_label: "Representative Image"
   representative_item_id_label: "Representative Item"
+  rightsstatements_org_uri_label: "RightsStatements.org URI"
   service_owner_label: Service Owner
   title_label: Title
   url_label: "Url"
