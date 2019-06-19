@@ -39,6 +39,9 @@ class SessionsController < ApplicationController
   end
 
   def clear_and_return_return_path
+    x = session[:login_return_uri]
+    z = session[:login_return_referer]
+    y = root_path
     return_url = session[:login_return_uri] || session[:login_return_referer] || root_path
     session[:login_return_uri] = session[:login_return_referer] = nil
     reset_session
