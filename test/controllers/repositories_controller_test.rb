@@ -33,7 +33,8 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
       assert_select 'td', '1234'
     end
     assert_select 'a', 'Edit Repository'
-    assert_select 'a', 'Create Virtual Repository'
+    assert_select 'a', 'New Virtual Repository'
+    assert_select 'a', 'New Collection'
   end
 
   test 'repository destroy' do

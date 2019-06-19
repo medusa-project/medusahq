@@ -12,4 +12,8 @@ class ActiveSupport::TestCase
     post '/auth/developer/callback', params: {name: @user.uid, email: @user.email}
   end
 
+  def pending
+    skip 'pending'
+  end
+
 end

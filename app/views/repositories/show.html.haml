@@ -3,7 +3,8 @@
   %h1 #{@repository.title}
 
   = link_to 'Edit Repository', edit_repository_path(@repository), class: 'btn btn-primary', 'aria-role': :button
-  = link_to 'Create Virtual Repository', new_virtual_repository_path(repository_id: @repository.id), class: 'btn btn-primary', 'aria-role': :button
+  = link_to 'New Virtual Repository', new_virtual_repository_path(repository_id: @repository.id), class: 'btn btn-primary', 'aria-role': :button
+  = link_to 'New Collection', new_collection_path(repository_uuid: @repository.uuid), class: 'btn btn-primary', 'aria-role': :button
 
   %section
     %h2 Metadata

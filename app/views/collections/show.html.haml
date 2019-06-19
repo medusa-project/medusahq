@@ -13,7 +13,7 @@
 
     %dl
       %dt= t 'description_label'
-      %dd= raw(@collection.description.html_safe.gsub("\n", '<br>'))
+      %dd= raw(@collection.description.html_safe.gsub("\n", '<br>')) if @collection.description
       %dt= t('access_url_label')
       %dd= @collection.access_url ? link_to(@collection.access_url, @collection.access_url, target: '_blank') : nil
       %dt= t('physical_collection_url_label')
