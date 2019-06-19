@@ -28,6 +28,8 @@ class CollectionsController < ApplicationController
   end
 
   def update
+    #Do not allow repository to be changed
+    params[:collection].delete(:repository_uuid)
     if @collection.update_attributes(allowed_params)
       redirect_to @collection
     else

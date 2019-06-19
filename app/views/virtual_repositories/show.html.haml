@@ -10,6 +10,6 @@
 
   %section
     %h2 Collections
-    %ul
+    %ul#collections
       - @virtual_repository.collections.order(:title).each do |collection|
         %li= link_to(collection.title, collection)
